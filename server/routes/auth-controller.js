@@ -56,22 +56,11 @@ authController.post("/signup", (req, res, next) => {
 
 authController.get("/login" ,function(req, res, next) {
     if(req.isAuthenticated()){
+        console.log('Returning user here TEST: ', req.user);
       return res.status(200).json(req.user);
     }
     return res.status(403).json({ message: 'Unauthorized' });});
 
-
-
-// , (req, res, next)=>{
-//     res.render("login");
-// });
-
-// authController.post("/login", passport.authenticate('local', {
-//     successRedirect: "/loggedin",
-//     failureRedirect: "/",
-//     failureFlash: true,
-//     passReqToCallback: true
-// }));
 
 
 authController.post("/login", function(req, res, next) {
@@ -87,21 +76,23 @@ authController.post("/login", function(req, res, next) {
         });
       }
       res.status(200).json(req.user);
-//      res.render("user");
     });
   })(req, res, next);
 });
+
 
 authController.post("/logout", function(req, res, next) {
   req.logout();
   res.status(200).json({ message: 'Success' });
 });
 
+
 authController.get("/loggedin" ,function(req, res, next) {
     if(req.isAuthenticated()){
       return res.status(200).json(req.user);
     }
     return res.status(403).json({ message: 'Unauthorized' });});
+
 
 authController.get("/private", (req, res, next) => {
   if(req.isAuthenticated()) {
@@ -110,5 +101,6 @@ authController.get("/private", (req, res, next) => {
 
   return res.status(403).json({ message: 'Unauthorized' });
 });
+
 
 module.exports = authController;

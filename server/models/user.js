@@ -11,6 +11,7 @@ const userSchema = new Schema({
     username:       String,
     postcode:       String,
     image:          String,
+    video:          String,
     consumer: { type: Schema.Types.ObjectId, ref: 'Consumer' },
     promoter: { type: Schema.Types.ObjectId, ref: 'Promoter' }},
 {   timestamps: {
