@@ -2,13 +2,9 @@
 const express           = require("express");
 const authController    = express.Router();
 const passport          = require("passport");
-
-// the user model
-const User           = require("../models/user");
-
-// Bcrypt for encrypting passwords
-const bcrypt         = require("bcrypt");
-const bcryptSalt     = 10;
+const User              = require("../models/user");
+const bcrypt            = require("bcrypt");
+const bcryptSalt        = 10;
 
 // authController.get("/signup", (req, res, next)=>{
 //     res.render("signup");
@@ -54,12 +50,12 @@ authController.post("/signup", (req, res, next) => {
   });
 });
 
-authController.get("/login" ,function(req, res, next) {
-    if(req.isAuthenticated()){
-        console.log('Returning user here TEST: ', req.user);
-      return res.status(200).json(req.user);
-    }
-    return res.status(403).json({ message: 'Unauthorized' });});
+// authController.get("/login" ,function(req, res, next) {
+//     if(req.isAuthenticated()){
+//         console.log('Returning user here TEST: ', req.user);
+//       return res.status(200).json(req.user);
+//     }
+//     return res.status(403).json({ message: 'Unauthorized' });});
 
 
 

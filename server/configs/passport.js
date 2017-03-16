@@ -27,9 +27,12 @@ module.exports = function (passport) {
   });
 
   passport.deserializeUser((id, cb) => {
-    User.findOne({ "_id": id }, (err, user) => {
-      if (err) { return cb(err); }
-      cb(null, user);
+    User.findOne({ "_id": id })
+        .populate('consumer')
+        .populate('promoter')
+        .then((user) => {
+            cb(null, user);
+        })
+        .catch((err) => {if (err) { return cb(err); }});
     });
-  });
 };
