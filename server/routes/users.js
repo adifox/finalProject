@@ -77,19 +77,38 @@ router.post('/promoedit', (req, res) => {
         postcode: req.body.updatedData.postalcode
     })
     .then((user) => {
-        var newPromoter = {
+        var newPromoter = new Promoter({
             interests: req.body.interests,
             promoterType: req.body.updatedData.promoterType
-        };
-        Promoter.create(newPromoter, (err, promoter) => {
-            if (err) console.log("There was an error ", err);
-            return res.status(200).json({
-                messsage:"Saved Promoter data",
-                interests: req.body.interests
-                });
+        });
+        newPromoter.save((err, promoter) => {
+            if(err){
+                return res.status(500).json({message:"Error"});
+            }
+            user.promoter = promoter._id;
+            user.save((err)=> {
+                if (err) {
+                    return res.status(500).json({message:"Error on saving promoter"});
+                } else {
+                    return res.status(200).json({message:"Saved Promoter data"});
+                }
+            });
         });
     });
 });
+
+
+// })(newPromoter, (err, promoter) => {
+//     if (err) console.log("There was an error ", err);
+//     return res.status(200).json({
+//         messsage:"Saved Promoter data",
+//         interests: req.body.interests
+//         });
+// });
+
+
+
+
 
 
 // ---------------- update the user from profile ---------------------

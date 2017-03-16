@@ -5,8 +5,6 @@ const Schema   = mongoose.Schema;
 const promoterSchema = new Schema({
     promoterType: { type: String, enum:["private","company"],
     },
-    videos:         String,
-    image:          String,
     interests: [{type: String}]
 });
 
