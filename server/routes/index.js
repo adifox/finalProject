@@ -1,13 +1,11 @@
-var path = require('path');
+var express = require('express');
+var router = express.Router();
 
 /* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index');
-// });
-
-module.exports = function(app) {
-
-app.all('/*', function (req, res) {
-    res.sendfile(__dirname + '/public/index.html');
+router.get('/', function(req, res, next) {
+  res.render('index');
 });
-};
+
+
+
+module.exports = router;

@@ -17,6 +17,7 @@ const flash           = require("connect-flash");
 const User            = require("./models/user");
 const bcrypt          = require("bcrypt");
 
+
 require('./configs/database');
 require('./configs/passport')(passport);
 var cors = require('cors');
@@ -26,7 +27,6 @@ var app = express();
 
 var whitelist = [
     'http://localhost:4200',
-    'http://localhost:3000',
 ];
 var corsOptions = {
     origin: function(origin, callback){
